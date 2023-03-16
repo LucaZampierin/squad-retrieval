@@ -5,7 +5,8 @@ In this repository I comapred the retrieval performance of three methods on the 
 - BM25
 - DPR
 
-Here below I include an example of the task>
+Here below I include an example of the task.
+
 ![An example of Wikipedia QA](./example_app.jpg)
 
 ### Dependencies
