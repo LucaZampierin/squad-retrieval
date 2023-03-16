@@ -7,7 +7,7 @@ In this repository I comapred the retrieval performance of three methods on the 
 
 Here below I include an example of the task.
 
-![An example of Wikipedia QA](./example_app.jpg)
+![An example of the retrieval task](./example_app.jpg)
 
 ### Dependencies
 
