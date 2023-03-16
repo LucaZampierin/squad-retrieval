@@ -7,4 +7,11 @@ In this repository I comapred the retrieval performance of three methods on the 
 
 ### Dependencies
 
+The required dependencies are included in 'requirements.txt'. Note, on a Windows the code cannot run fully as a required library, faiss, is not yet well supported. 
+
 ### Run DEMO
+In order to run the code you can clone this repository:
+
+`git clone `
+`cd src`
+`python evaluate&demo.py`
