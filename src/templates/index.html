@@ -1,0 +1,102 @@
+<!DOCTYPE html>
+<html>
+<head>
+  <title>My App</title>
+  <style>
+    body {
+      background-color: #f7f7f7;
+      font-family: Arial, sans-serif;
+    }
+    h1 {
+      color: #004080;
+      margin-top: 20px;
+      margin-bottom: 20px;
+      margin-left: 10px;
+      margin-right: 10px;
+      width: 80%;
+      text-align: center;
+      font-size: 36px;
+    }
+    form {
+      display: flex;
+      flex-direction: row;
+      justify-content: center;
+      align-items: center;
+      margin-bottom: 20px;
+    }
+    label {
+      color: #004080;
+      font-size: 24px;
+      margin-right: 20px;
+    }
+    select {
+      padding: 10px;
+      font-size: 20px;
+      border: 2px solid #004080;
+      border-radius: 8px;
+      background-color: #fff;
+      color: #004080;
+    }
+    button {
+      padding: 10px 20px;
+      background-color: #004080;
+      color: #fff;
+      border: none;
+      border-radius: 8px;
+      font-size: 20px;
+      cursor: pointer;
+    }
+    ul {
+      list-style: none;
+      margin: 0;
+      padding: 0;
+      margin-bottom: 20px;
+    }
+    h2 {
+      color: #004080;
+      font-size: 28px;
+      margin-bottom: 10px;
+    }
+    li {
+      font-size: 20px;
+      margin-bottom: 10px;
+    }
+    img {
+    max-width: 100%;
+    }
+  </style>
+</head>
+<body>
+  <h1>Retrieve relevant context for SQuAD development questions</h1>
+  <form action="/" method="post">
+    <label for="select-entry">Select an entry:</label>
+    <select name="entry" id="select-entry">
+      {% for row in data %}
+        <option value="{{ row['question'] }}">{{ row['question'] }}</option>
+      {% endfor %}
+    </select>
+    <button type="submit">Submit</button>
+    <button type="reset">Reset</button>
+  </form>
+  {% if selected_entry %}
+    <h2>Selected entry: {{ selected_entry }}</h2>
+    <ul>
+      <li><strong>Answer:</strong> {{ data.loc[data['question'] == selected_entry]['answer'].values[0] }}</li>
+      <li><strong>Context title:</strong> {{ data.loc[data['question'] == selected_entry]['title_context'].values[0] }}</li>
+      <li><strong>Context:</strong> {{ data.loc[data['question'] == selected_entry]['context'].values[0] }}</li>
+    </ul>
+    <h2>Top Result:</h2>
+    <ul>
+      <li><strong>BM25:</strong> {{ data.loc[data['question'] == selected_entry]['bm25'].values[0][0] }}</li>
+      <li><strong>TFIDF:</strong> {{ data.loc[data['question'] == selected_entry]['TFIDF'].values[0][0] }}</li>
+      <li><strong>DPR Retrieval:</strong> {{ data.loc[data['question'] == selected_entry]['DPR_retrieval'].values[0][0] }}</li>
+    </ul>
+  {% endif %}
+
+  <script>
+    function resetForm() {
+      document.getElementById("select-entry").selectedIndex = 0;
+    }
+  </script>
+</body>
+</html>
