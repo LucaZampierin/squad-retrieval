@@ -15,6 +15,7 @@ if __name__ == '__main__':
     parser = argparse.ArgumentParser(description="Script to evaluate the IR system")
     parser.add_argument('--mode', type=str, choices=['train', 'eval'],
                         help='Set train if the DPR should be further finetuned', default='eval')
+    parser.add_argument('--question', type=str, help='Insert the question that you would like to ask', default=None)
     args = vars(parser.parse_args())
 
     if not os.listdir('../Data/train_dev_split'):
@@ -45,7 +46,11 @@ if __name__ == '__main__':
         with open('../Results/dev_with_results.json', 'r') as f:
             val_data = pd.DataFrame(json.load(f))
 
-    print(val_data.columns)
+    if args['question']:
+        print('BM25')
+        print(get_bm25_predictions(args['question'], val_passages)[0])
+        print('TFIDF')
+        print(get_tfidf_predictions(args['question'], val_passages)[0])
     compute_performance(val_data)
 
 

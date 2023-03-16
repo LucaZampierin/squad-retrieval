@@ -10,7 +10,7 @@ save_dir = "../DPR"
 
 def get_dpr_predictions(data, val_passages):
     # This function will give an error on Windows as the faiss library is not well supported.
-    document_store = FAISSDocumentStore()
+    # document_store = FAISSDocumentStore()
     # document_store = ElasticsearchDocumentStore()
     document_store.write_documents(prepare_dev_data(val_passages))
     DPR_retriever = DensePassageRetriever.load(load_dir=save_dir, document_store=document_store)

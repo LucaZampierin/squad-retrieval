@@ -15,13 +15,19 @@ def prepare_dev_data(dataset):
 
 
 def get_retrieved_docs(dataset, retriever):
-    output = []
-    for query in tqdm(dataset.question):
-        retrieved = retriever.retrieve(query, top_k=10)
-        retrieved_list = []
-        for doc in retrieved:
-            retrieved_list.append(doc.to_dict()['content'])
-        output.append(retrieved_list)
+    if type(dataset) == str:
+        output= []
+        retrieved_list = retriever.retrieve(dataset, top_k=10)
+        for doc in retrieved_list:
+            output.append(doc.to_dict()['content'])
+    else:
+        output = []
+        for query in tqdm(dataset.question):
+            retrieved = retriever.retrieve(query, top_k=10)
+            retrieved_list = []
+            for doc in retrieved:
+                retrieved_list.append(doc.to_dict()['content'])
+            output.append(retrieved_list)
     return output
 
 

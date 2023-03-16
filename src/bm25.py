@@ -39,11 +39,16 @@ def tokenize_docs(passages):
 def get_bm25_predictions(data, passages, k=10):
     original_docs, tokenized_docs, context_idx = tokenize_docs(passages)
     bm25 = BM25Okapi(tokenized_docs)
-    output = []
-    for query in tqdm(data.question):
-        tokenized_query = vectorize_query(query)
-        retrieved = bm25.get_top_n(tokenized_query, original_docs, n=k)
-        output.append(retrieved)
+    if type(data) == str:
+        tokenized_query = vectorize_query(data)
+        output = bm25.get_top_n(tokenized_query, original_docs, n=k)
+
+    else:
+        output = []
+        for query in tqdm(data.question):
+            tokenized_query = vectorize_query(query)
+            retrieved = bm25.get_top_n(tokenized_query, original_docs, n=k)
+            output.append(retrieved)
     return output
 
 
