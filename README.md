@@ -5,6 +5,9 @@ In this repository I comapred the retrieval performance of three methods on the 
 - BM25
 - DPR
 
+Here below I include an example of the task>
+![An example of Wikipedia QA](./docs/example app.png)
+
 ### Dependencies
 
 The required dependencies are included in `requirements.txt`. Note, on a Windows the code cannot run fully as a required library, faiss, is not yet well supported. 
